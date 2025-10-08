@@ -9,11 +9,13 @@
 # My name is AL SWEIGART and I am 4,000 years old.
 # Ymay amenay isyay ALYAY EIGARTSWAY andyay Iyay amyay 4,000 yearsyay oldyay.
 
-print('Enter the English message to translate into pig latin:')
-message = input()
-VOWELS = ('a', 'e', 'i', 'o', 'u')
+VOWELS = ('a', 'e', 'i', 'o', 'u', 'y')
 
 def pig_latin(message):
+    """
+    Precondition: message is a string of one or more words.
+    Postcondition: returns the Pig Latin translation of message.
+    """
     pig_latin = []
     
     for word in message.split():
@@ -47,7 +49,7 @@ def pig_latin(message):
         if prefix_constants != '':
             word += prefix_constants + 'ay'
         else:
-            word += 'ay'
+            word += 'yay'
 
         # restore UPPERCASE or Title
         if was_upper:
@@ -55,9 +57,21 @@ def pig_latin(message):
         if was_title:
             word = word.title()
         
-        
+        # Add non-letters at prefix and suffix
+        pig_latin.append(prefix_non_letters + word + suffix_non_letters)
 
+    return ' '.join(pig_latin)
 
+def main():
+    """
+    Precondition: message is a string of one or more words.
+    Postcondition: returns the Pig Latin translation of message.
+    """
+    message = input("Enter the English message to translate into pig latin: ")
+    print(pig_latin(message))
+
+if __name__ == "__main__":
+    main()
 
 
 
