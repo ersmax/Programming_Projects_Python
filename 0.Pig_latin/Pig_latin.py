@@ -26,17 +26,38 @@ def pig_latin(message):
             pig_latin.append(prefix_non_letters)
             continue
     
-    # remove non letters at the end
-    suffix_non_letters = ''
-    while not word[-1].isalpha():
-        suffix_non_letters += word[-1]
-        word = word[:-1]
-    
-    was_upper = word.isupper()
-    was_title = word.istitle()
+        # remove non letters at the end
+        suffix_non_letters = ''
+        while not word[-1].isalpha():
+            suffix_non_letters += word[-1]
+            word = word[:-1]
+        
+        was_upper = word.isupper()
+        was_title = word.istitle()
 
-    word = word.isttitle()
-    
+        word = word.lower()
+
+        # check words begginning with constants
+        prefix_constants = ''
+        while len(word) > 0 and not word[0] in VOWELS:
+            prefix_constants += word[0]
+            word = word[1:]
+
+        # add ay at the end
+        if prefix_constants != '':
+            word += prefix_constants + 'ay'
+        else:
+            word += 'ay'
+
+        # restore UPPERCASE or Title
+        if was_upper:
+            word = word.upper()
+        if was_title:
+            word = word.title()
+        
+        
+
+
 
 
 
